@@ -1,3 +1,4 @@
+//  3. Calculate the size of tree using recursion.
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,3 +1,5 @@
+//  6. Check if given binary tree is BST or not.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

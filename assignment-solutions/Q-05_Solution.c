@@ -1,3 +1,4 @@
+//  5. Count number of leaves in a given binary tree.
 #include <stdio.h>
 #include <stdlib.h>
 

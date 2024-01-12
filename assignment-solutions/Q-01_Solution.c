@@ -1,4 +1,4 @@
-//  Q1. Program to implement push() and pop() operations of Stack using Singly Linked List
+//  1. Program to implement push() and pop() operations of Stack using Singly Linked List
 #include<stdio.h>
 #include<stdlib.h>
 

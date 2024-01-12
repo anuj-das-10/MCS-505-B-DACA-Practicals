@@ -1,3 +1,4 @@
+//  4. Determine if two given tree are identical or not.
 #include <stdio.h>
 #include <stdlib.h>
 

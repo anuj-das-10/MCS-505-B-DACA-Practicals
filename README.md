@@ -12,11 +12,10 @@ Date of Submission: 12/01/2024 <br />
 <br/>
 
 2. Write a program to perform the following: 
-    -   Infix to Prefix
     -   Infix to Postfix
-    -   Prefix to Infix
-    -   Prefix to Postfix
-    -   Postfix to Infix
+    - [Infix to Postfix Solution](./assignment-solutions/Q-02_Solution-a.c)✅    
+    -   Infix to Prefix
+    - [Infix to Pretfix Solution](./assignment-solutions/Q-02_Solution-b.c)✅
 
 <br/>
 
