@@ -11,11 +11,11 @@ Date of Submission: 12/01/2024 <br />
 
 <br/>
 
-2. Write a program to perform the following: 
-    -   Infix to Postfix
-    - [Infix to Postfix Solution](./assignment-solutions/Q-02_Solution-a.c)✅    
-    -   Infix to Prefix
-    - [Infix to Pretfix Solution](./assignment-solutions/Q-02_Solution-b.c)✅
+2. Implement Linear Queue to perform all queue operations using:
+    - (a) Array
+    - [Array Implementation](./assignment-solutions/Q-02_Solution-a.c)✅    
+    - (b) Linked List
+    - [Linked List Implementation](./assignment-solutions/Q-02_Solution-b.c)✅
 
 <br/>
 

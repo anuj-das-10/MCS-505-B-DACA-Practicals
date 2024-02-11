@@ -1,124 +1,97 @@
-//  2.(b) Write a program to perform Infix to Prefix Conversion.
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+// 2.(b) Program to implement all operations of Linear Queue using Linked List
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node *next;
+};
 
-#define MAX_SIZE 100
+struct Node *front = NULL, *rear = NULL;       //Global Variables
 
-// Stack implementation
-typedef struct {
-    char items[MAX_SIZE];
-    int top;
-} Stack;
+void enQueue(int val);
+void deQueue();
 
-void initialize(Stack *stack) {
-    stack->top = -1;
-}
-
-int isEmpty(Stack *stack) {
-    return stack->top == -1;
-}
-
-int isFull(Stack *stack) {
-    return stack->top == MAX_SIZE - 1;
-}
-
-void push(Stack *stack, char item) {
-    if (isFull(stack)) {
-        printf("Stack overflow\n");
-        exit(EXIT_FAILURE);
+void displayQueue() {
+    struct Node *temp = front;
+	printf("Elements in the Queue: ");
+    while(temp) {
+        printf("%d   ",temp->data);
+        temp = temp->next;
     }
-    stack->items[++stack->top] = item;
+    printf("\n\n");
 }
 
-char pop(Stack *stack) {
-    if (isEmpty(stack)) {
-        printf("Stack underflow\n");
-        exit(EXIT_FAILURE);
+void main() {
+	int choice, x;
+	do {
+	printf("<------ QUEUE OPERATIONS ------>\n");
+	printf("1. enQueue Elements\n2. deQueue Elements\n3. Display Elements\n4. Exit\n");
+	printf("\nEnter Your Choice: ");
+	scanf("%d", &choice);
+	
+	switch(choice) {
+		case 1: printf("Enter the element to be inserted: ");
+				scanf("%d",&x);
+				enQueue(x);
+				break;
+		case 2: deQueue();
+				break;
+		case 3: system("cls");
+				displayQueue();
+				break;
+		case 4: system("cls");
+				printf("\nExited...\n\n");
+				exit(0);
+
+	       default: system("cls");
+				printf("\nInvalid Choice!!\n\n");
+		}
+	}while(choice != 4);
+}
+
+void enQueue(int val) {
+    struct Node *newNode = malloc(sizeof(struct Node));
+    if(!newNode) {
+    	system("cls");
+    	printf("Queue Overflow!\n");
+	}
+    
+    newNode->data = val;
+    newNode->next = NULL;
+
+    if(front == NULL && rear == NULL) {
+		front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
     }
-    return stack->items[stack->top--];
+    
+    system("cls");
+    printf("%d enQueued to the Queue!\n", newNode->data);
+    displayQueue();
 }
 
-char peek(Stack *stack) {
-    if (isEmpty(stack)) {
-        printf("Stack is empty\n");
-        exit(EXIT_FAILURE);
-    }
-    return stack->items[stack->top];
-}
 
-// Function to check if a character is an operator
-int isOperator(char ch) {
-    return (ch == '+' || ch == '-' || ch == '*' || ch == '/');
-}
 
-// Function to get the precedence of an operator
-int getPrecedence(char op) {
-    if (op == '+' || op == '-')
-        return 1;
-    if (op == '*' || op == '/')
-        return 2;
-    return 0;  // Assuming '(' has the lowest precedence
-}
+void deQueue() {
+    struct Node *temp;
 
-// Function to reverse a string
-void reverseString(char str[]) {
-    int length = strlen(str);
-    for (int i = 0; i < length / 2; i++) {
-        char temp = str[i];
-        str[i] = str[length - i - 1];
-        str[length - i - 1] = temp;
+    if(front == NULL){
+		system("cls");
+		printf("Queue Underflow!\n");
+	}
+	else {
+        temp = front;
+		front = front->next;
+
+    	if(front == NULL){
+			rear = NULL;
+		}
+		
+		system("cls");
+		printf("%d deQueued from the Queue!\n", temp->data);
+        free(temp);
+        displayQueue();
     }
 }
 
-// Function to convert infix expression to prefix expression
-void infixToPrefix(char infix[], char prefix[]) {
-    Stack operatorStack;
-    initialize(&operatorStack);
-
-    int infixLen = strlen(infix);
-    int prefixIndex = 0;
-
-    for (int i = infixLen - 1; i >= 0; i--) {
-        char currentChar = infix[i];
-
-        if (isalnum(currentChar)) {
-            prefix[prefixIndex++] = currentChar;
-        } else if (currentChar == ')') {
-            push(&operatorStack, currentChar);
-        } else if (currentChar == '(') {
-            while (!isEmpty(&operatorStack) && peek(&operatorStack) != ')') {
-                prefix[prefixIndex++] = pop(&operatorStack);
-            }
-            pop(&operatorStack);  // Pop ')'
-        } else {  // Operator
-            while (!isEmpty(&operatorStack) && getPrecedence(peek(&operatorStack)) > getPrecedence(currentChar)) {
-                prefix[prefixIndex++] = pop(&operatorStack);
-            }
-            push(&operatorStack, currentChar);
-        }
-    }
-
-    while (!isEmpty(&operatorStack)) {
-        prefix[prefixIndex++] = pop(&operatorStack);
-    }
-
-    prefix[prefixIndex] = '\0';
-
-    // Reverse the prefix expression to get the final result
-    reverseString(prefix);
-}
-
-int main() {
-    char infix[MAX_SIZE], prefix[MAX_SIZE];
-
-    printf("Enter infix expression: ");
-    gets(infix);
-
-    infixToPrefix(infix, prefix);
-
-    printf("Prefix expression: %s\n", prefix);
-
-    return 0;
-}
